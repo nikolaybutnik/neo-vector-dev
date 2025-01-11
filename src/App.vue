@@ -27,7 +27,19 @@
           </div>
         </div>
       </section>
-      <section class="content-3">Test Content 3</section>
+      <section class="content-3">
+        <div class="wavy">
+          <div class="wrapper">
+            <h1>Test 3 Title</h1>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Dignissimos aliquam, totam ab nobis optio necessitatibus ipsum.
+              Dicta, obcaecati quibusdam cumque, quos natus, cum atque deserunt
+              totam ipsa voluptate id eaque!
+            </p>
+          </div>
+        </div>
+      </section>
     </div>
   </div>
 </template>
@@ -124,6 +136,23 @@ export default defineComponent({
       left: 0;
       transform: rotate(0.5turn);
     }
+  }
+
+  .wavy {
+    background: linear-gradient(to right, #00f260, #0575e6);
+    color: black;
+    padding: 7rem 3rem;
+
+    --mask: radial-gradient(29px at 50% 41px, #000 99%, #0000 101%)
+        calc(50% - 40px) 0/80px 51% repeat-x,
+      radial-gradient(29px at 50% -21px, #0000 99%, #000 101%) 50% 20px/80px
+        calc(51% - 20px) repeat-x,
+      radial-gradient(29px at 50% calc(100% - 41px), #000 99%, #0000 101%)
+        calc(50% - 40px) 100%/80px 51% repeat-x,
+      radial-gradient(29px at 50% calc(100% + 21px), #0000 99%, #000 101%) 50%
+        calc(100% - 20px) / 80px calc(51% - 20px) repeat-x;
+    -webkit-mask: var(--mask);
+    mask: var(--mask);
   }
 }
 </style>
