@@ -57,18 +57,18 @@ export default defineComponent({
   setup() {
     const observer = ref<IntersectionObserver | null>(null);
 
-    const animateLines = (sectionIndex: number) => {
-      const lines = document.querySelectorAll(".line");
-      lines.forEach((line) => {
-        const path = line as SVGPathElement;
-        const length = path.getTotalLength();
-        const offset = length * sectionIndex * 0.5;
-        (line as SVGPathElement).style.transition =
-          "stroke-dashoffset 1s ease-in-out";
-        (line as SVGPathElement).style.strokeDasharray = `${length}`;
-        (line as SVGPathElement).style.strokeDashoffset = `${offset}`;
-      });
-    };
+    // const animateLines = (sectionIndex: number) => {
+    //   const lines = document.querySelectorAll(".line");
+    //   lines.forEach((line) => {
+    //     const path = line as SVGPathElement;
+    //     const length = path.getTotalLength();
+    //     const offset = length * sectionIndex * 0.5;
+    //     (line as SVGPathElement).style.transition =
+    //       "stroke-dashoffset 1s ease-in-out";
+    //     (line as SVGPathElement).style.strokeDasharray = `${length}`;
+    //     (line as SVGPathElement).style.strokeDashoffset = `${offset}`;
+    //   });
+    // };
 
     onMounted(() => {
       const sections = document.querySelectorAll(".parallax-container section");
