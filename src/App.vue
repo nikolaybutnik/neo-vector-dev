@@ -49,7 +49,7 @@
 
 <script lang="ts">
 import { defineComponent, ref, onMounted } from "vue";
-import SideNav from "./components/SideNav.vue";
+import SideNav from "./components/SideNav/SideNav.vue";
 
 export default defineComponent({
   name: "App",
