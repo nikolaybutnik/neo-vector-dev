@@ -8,23 +8,23 @@
       height="100%"
     >
       <path
-        class="main-line"
-        d="M89 0 L89 100"
+        class="main-line animate-pulse"
+        d="M50 -1 L100 -1 L100 100 L85 100"
         stroke="#333333"
-        stroke-width="23"
+        fill="#333333"
       />
-      <path
+      <!-- <path
         class="secondary-line-1"
         d="M66 0 L66 100"
         stroke="#333333"
         stroke-width="9"
-      />
-      <path
+      /> -->
+      <!-- <path
         class="secondary-line-2"
         d="M52 0 L52 100"
         stroke="#333333"
         stroke-width="5"
-      />
+      /> -->
       <!-- <path
         class="secondary-line-3"
         d="M52 0 L52 100"
@@ -34,23 +34,22 @@
 
       <mask id="text-mask">
         <path
-          class="main-line-mask"
-          d="M89 0 L89 100"
-          stroke="white"
-          stroke-width="23"
+          class="main-line-mask animate-pulse"
+          d="M50 -1 L100 -1 L100 100 L85 100"
+          fill="white"
         />
-        <path
+        <!-- <path
           class="secondary-line-mask-1"
           d="M66 0 L66 100"
           stroke="white"
           stroke-width="9"
-        />
-        <path
+        /> -->
+        <!-- <path
           class="secondary-line-mask-2"
           d="M52 0 L52 100"
           stroke="white"
           stroke-width="5"
-        />
+        /> -->
         <!-- <path
           class="secondary-line-mask-3"
           d="M52 0 L52 100"
@@ -64,6 +63,7 @@
           v-for="(item, index) in items"
           :key="index"
           :text="item.text"
+          :href="item.href"
           :xCoordinate="item.x"
           :yCoordinate="item.y"
         />
@@ -81,10 +81,10 @@ export default defineComponent({
   components: { LinkItem },
   setup() {
     const items = [
-      { text: "HOME", x: 0, y: 42 },
-      { text: "ABOUT", x: 0, y: 50 },
-      { text: "PROJECTS", x: 0, y: 58 },
-      { text: "CONTACT", x: 0, y: 66 },
+      { text: "HOME", href: "#content-1", x: 2, y: 42 },
+      { text: "ABOUT", href: "#content-2", x: 2, y: 50 },
+      { text: "PROJECTS", href: "#content-3", x: 2, y: 58 },
+      { text: "CONTACT", href: "#content-4", x: 2, y: 66 },
     ];
 
     return { items };
@@ -99,5 +99,21 @@ export default defineComponent({
   align-self: flex-end;
   display: flex;
   position: relative;
+
+  .animate-pulse {
+    animation: pulse 5s infinite ease-in-out;
+  }
+
+  @keyframes pulse {
+    0% {
+      d: path("M50 -1 L100 -1 L100 100 L85 100");
+    }
+    50% {
+      d: path("M40 -1 L100 -1 L100 100 L75 100");
+    }
+    100% {
+      d: path("M50 -1 L100 -1 L100 100 L85 100");
+    }
+  }
 }
 </style>

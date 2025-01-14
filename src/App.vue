@@ -1,10 +1,10 @@
 <template>
   <div class="app">
     <div class="parallax-container">
-      <section class="content-1">
+      <section id="content-1" class="content-section">
         <SideNav />
       </section>
-      <section class="content-2">
+      <section id="content-2" class="content-section">
         <div class="diagonal">
           <div class="wrapper">
             <h1>Test 2 Title</h1>
@@ -17,7 +17,7 @@
           </div>
         </div>
       </section>
-      <section class="content-3">
+      <section id="content-3" class="content-section">
         <div class="spikes">
           <div class="wrapper">
             <h1>Test 3 Title</h1>
@@ -30,7 +30,7 @@
           </div>
         </div>
       </section>
-      <section class="content-4">
+      <section id="content-4" class="content-section">
         <div class="wavy">
           <div class="wrapper">
             <h1>Test 4 Title</h1>
@@ -121,10 +121,7 @@ export default defineComponent({
   scroll-snap-type: y mandatory;
   overflow-y: scroll;
 
-  .content-1,
-  .content-2,
-  .content-3,
-  .content-4 {
+  .content-section {
     height: 100vh;
     scroll-snap-align: start;
     display: flex;
