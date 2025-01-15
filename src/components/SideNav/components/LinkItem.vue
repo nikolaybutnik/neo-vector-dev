@@ -1,5 +1,5 @@
 <template>
-  <a :href="href">
+  <g @click="onNavigate()">
     <text
       class="top-layer nav-link-text"
       :x="xCoordinate"
@@ -24,11 +24,11 @@
     >
       {{ text }}
     </text>
-  </a>
+  </g>
 </template>
   
 <script lang="ts">
-import { defineComponent, PropType } from "vue";
+import { defineComponent, PropType, defineEmits } from "vue";
 
 export default defineComponent({
   name: "LinkItem",
@@ -37,7 +37,7 @@ export default defineComponent({
       required: true,
       type: String as PropType<string>,
     },
-    href: {
+    scrollTarget: {
       required: true,
       type: String as PropType<string>,
     },
@@ -49,6 +49,14 @@ export default defineComponent({
       required: true,
       type: Number as PropType<number>,
     },
+  },
+  setup(props, context) {
+    const onNavigate = () => {
+      const target: string = props.scrollTarget;
+      context.emit("onNavigate", target);
+    };
+
+    return { onNavigate };
   },
 });
 </script>
@@ -63,13 +71,15 @@ text {
 
 .top-layer {
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+  transition: fill 0.2s ease-in-out;
 }
 
 .bottom-layer {
   text-shadow: 2px 2px 4px rgba(51, 51, 51, 0.8);
+  transition: fill 0.2s ease-in-out;
 }
 
-a {
+g {
   transition: transform 0.2s ease-in-out;
 
   &:hover {

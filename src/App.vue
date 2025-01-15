@@ -1,10 +1,10 @@
 <template>
   <div class="app">
     <div class="parallax-container">
-      <section id="content-1" class="content-section">
-        <SideNav />
+      <section ref="homeSection" class="home-section content-section">
+        <SideNav @onNavigate="handleScroll" />
       </section>
-      <section id="content-2" class="content-section">
+      <section ref="aboutSection" class="about-section content-section">
         <div class="diagonal">
           <div class="wrapper">
             <h1>Test 2 Title</h1>
@@ -17,7 +17,7 @@
           </div>
         </div>
       </section>
-      <section id="content-3" class="content-section">
+      <section ref="projectsSection" class="projects-section content-section">
         <div class="spikes">
           <div class="wrapper">
             <h1>Test 3 Title</h1>
@@ -30,7 +30,7 @@
           </div>
         </div>
       </section>
-      <section id="content-4" class="content-section">
+      <section ref="contactSection" class="contact-section content-section">
         <div class="wavy">
           <div class="wrapper">
             <h1>Test 4 Title</h1>
@@ -48,50 +48,40 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted } from "vue";
+import { defineComponent, ref } from "vue";
 import SideNav from "./components/SideNav/SideNav.vue";
 
 export default defineComponent({
   name: "App",
   components: { SideNav },
   setup() {
-    const observer = ref<IntersectionObserver | null>(null);
+    const homeSection = ref<HTMLElement | null>(null);
+    const aboutSection = ref<HTMLElement | null>(null);
+    const projectsSection = ref<HTMLElement | null>(null);
+    const contactSection = ref<HTMLElement | null>(null);
+    const sections = [
+      homeSection,
+      aboutSection,
+      projectsSection,
+      contactSection,
+    ];
+    // const observer = ref<IntersectionObserver | null>(null);
 
-    // const animateLines = (sectionIndex: number) => {
-    //   const lines = document.querySelectorAll(".line");
-    //   lines.forEach((line) => {
-    //     const path = line as SVGPathElement;
-    //     const length = path.getTotalLength();
-    //     const offset = length * sectionIndex * 0.5;
-    //     (line as SVGPathElement).style.transition =
-    //       "stroke-dashoffset 1s ease-in-out";
-    //     (line as SVGPathElement).style.strokeDasharray = `${length}`;
-    //     (line as SVGPathElement).style.strokeDashoffset = `${offset}`;
-    //   });
-    // };
-
-    onMounted(() => {
-      const sections = document.querySelectorAll(".parallax-container section");
-      observer.value = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-              const sectionIndex = Array.from(sections).indexOf(
-                entry.target as HTMLElement
-              );
-              // animateLines(sectionIndex);
-            }
-          });
-        },
-        { threshold: 0.5 }
+    const handleScroll = (scrolltargetClass: string) => {
+      const [targetSection] = sections.filter((section) =>
+        section?.value?.classList?.contains(scrolltargetClass)
       );
+      targetSection?.value?.scrollIntoView({ behavior: "smooth" });
+    };
 
-      sections.forEach((section: Element) => observer.value?.observe(section));
-    });
-
-    return {};
+    return {
+      homeSection,
+      aboutSection,
+      projectsSection,
+      contactSection,
+      handleScroll,
+    };
   },
-  methods: {},
 });
 </script>
 

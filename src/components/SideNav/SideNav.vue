@@ -61,9 +61,10 @@
       <g class="link-items">
         <LinkItem
           v-for="(item, index) in items"
+          @onNavigate="handleNavigation"
           :key="index"
           :text="item.text"
-          :href="item.href"
+          :scrollTarget="item.scrollTarget"
           :xCoordinate="item.x"
           :yCoordinate="item.y"
         />
@@ -76,18 +77,29 @@
 import { defineComponent } from "vue";
 import LinkItem from "./components/LinkItem.vue";
 
+interface NavItem {
+  text: string;
+  scrollTarget: string;
+  x: number;
+  y: number;
+}
+
 export default defineComponent({
   name: "SideNav",
   components: { LinkItem },
-  setup() {
-    const items = [
-      { text: "HOME", href: "#content-1", x: 2, y: 42 },
-      { text: "ABOUT", href: "#content-2", x: 2, y: 50 },
-      { text: "PROJECTS", href: "#content-3", x: 2, y: 58 },
-      { text: "CONTACT", href: "#content-4", x: 2, y: 66 },
+  setup(_, context) {
+    const items: NavItem[] = [
+      { text: "HOME", scrollTarget: "home-section", x: 2, y: 42 },
+      { text: "ABOUT", scrollTarget: "about-section", x: 2, y: 50 },
+      { text: "PROJECTS", scrollTarget: "projects-section", x: 2, y: 58 },
+      { text: "CONTACT", scrollTarget: "contact-section", x: 2, y: 66 },
     ];
 
-    return { items };
+    const handleNavigation = (data: string) => {
+      context.emit("onNavigate", data);
+    };
+
+    return { items, handleNavigation };
   },
 });
 </script>
